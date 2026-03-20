@@ -1,73 +1,73 @@
-# MentalHealth-RAG-Assistant 🧠🤖
+# MentalHealth-RAG-System 🧠🔍
 
-A Retrieval-Augmented Generation (RAG) chatbot powered by Google Gemini, providing medical manual based mental health information with source-grounded responses.
+A Retrieval-Augmented Generation (RAG) system running on Google Gemini, providing medical manual-based mental health information with source-grounded, highly accurate responses.
 
-## Features ✨
+## Overview ✨
+This project implements an end-to-end RAG pipeline designed specifically for clinical and mental health guidelines. It extracts dense medical text, processes it into semantically meaningful chunks, and leverages vector similarity search to ground generative outputs in authoritative sources.
 
-- 📄 **PDF Processing**: Extract text from medical manual PDFs
-- 🧹 **Text Cleaning**: Remove artifacts and normalize text
-- ✂️ **Semantic Chunking**: 200-500 word context-aware segments
-- 🔍 **Vector Search**: FAISS with `all-MiniLM-L6-v2` embeddings
-- 🤖 **Gemini Integration**: Latest Google LLM for generation
-- 🏥 **Clinical Focus**: Specialized for mental health queries
+### Core Architecture
+
+1. **📄 Document Ingestion**: Extracts raw text from medical manual PDFs.
+2. **🧹 Preprocessing**: Cleans artifacts, regularizes formatting, and normalizes text.
+3. **✂️ Semantic Chunking**: Splits text into 200-500 word context-aware segments.
+4. **🧠 Embedding Generation**: Uses `all-MiniLM-L6-v2` (`sentence-transformers`) to convert text into high-dimensional vectors.
+5. **🔍 Vector Search**: Stores and retrieves semantic chunks efficiently using FAISS (Facebook AI Similarity Search).
+6. **⚙️ Generation**: Formulates grounded answers using Google Gemini's advanced LLM capabilities.
 
 ## Installation ⚙️
 
 ```bash
-git clone https://github.com/SS14403/mentalhealth-rag-assistant.git
-cd mentalhealth-rag-assistant
+git clone https://github.com/zeyad171/MentalHealth-RAG-System.git
+cd MentalHealth-RAG-System
 pip install -r requirements.txt
 ```
-Usage 🚀
-Add your medical manual PDF to the /data folder
 
-Create a .env file and add the following:
+## Setup & Usage 🚀
+
+1. **Add Data**: Place your medical manual PDF inside the `data/` folder.
+2. **Environment Variables**: Create a `.env` file in the root directory and add your credentials:
 ```bash
 GEMINI_API_KEY="your_api_key"
 PDF_PATH="data/manual.pdf"
 ```
 
-Example Queries 💡
-
-```python
-"What are the diagnostic criteria for PTSD?"
-"Explain the difference between bipolar I and II"
-"List autism spectrum disorder symptoms in adults"
-```
-
-Project Structure 📂
+3. **Run the Pipeline**:
+Execute the main script to ingest the documents, build the vector index, and start the system:
 ```bash
-mentalhealth-rag-assistant/
-├── data/               # PDF storage
-├── main.py             # Main pipeline
-├── cleaning.ipynb      # Data cleaning notebook
-├── cleaning.py         # Advanced cleaning script
-├── requirements.txt    # Dependencies
-└── README.md
+python main.py
 ```
 
+*Alternatively, if you only need to run the data cleaning pipeline:*
+```bash
+python cleaning.py data/manual.pdf
+```
+
+## Example Queries 💡
+
+- *"What are the diagnostic criteria for PTSD?"*
+- *"Explain the difference between bipolar I and II"*
+- *"List autism spectrum disorder symptoms in adults"*
+
+## Project Structure 📂
+```bash
+MentalHealth-RAG-System/
+├── data/               # Medical manual PDF storage
+├── main.py             # Main inference and execution pipeline
+├── cleaning.py         # Advanced data cleaning and chunking script
+├── Main.ipynb          # Jupyter notebook for interactive testing
+├── cleaning.ipynb      # Jupyter notebook for interactive cleaning
+├── requirements.txt    # Project dependencies
+├── .gitignore          # Git exclusion rules
+└── README.md           # Project documentation
+```
 
 ## 🛠 Troubleshooting
 
-Common issues and solutions:
-
 | Issue | Solution |
 |-------|----------|
-| **Gemini API errors** | Verify your API key at [Google AI Studio](https://aistudio.google.com/) and ensure you're using the correct model name (`gemini-pro` or `gemini-1.5-pro-latest`) |
-| **PDF extraction fails** | Replace `PyPDF2` with `pdfplumber`:<br>`pip uninstall PyPDF2`<br>`pip install pdfplumber` |
-| **Memory issues** | Reduce `CHUNK_SIZE` in `config.py` (try 200-300 words) and restart the application |
-| **FAISS loading errors** | Rebuild the vector store:<br>`rm faiss.index`<br>Then rerun `main.py` |
-| **No responses from Gemini** | Check the prompt length (max 30K tokens for `gemini-pro`). Split long contexts into smaller chunks |
-| **Missing dependencies** | Ensure all packages are installed:<br>`pip install -r requirements.txt` |
+| **Gemini API errors** | Verify your API key at [Google AI Studio](https://aistudio.google.com/) and ensure the variable is saved in `.env`. |
+| **FAISS loading errors** | Rebuild the vector store by deleting `faiss.index` and rerunning `main.py`. |
+| **Missing dependencies** | Ensure all packages are installed via `pip install -r requirements.txt`. |
 
-
-
-💡 **Pro Tip**: Always check the error logs for detailed messages. Common fixes are often highlighted there.
-
-
-Disclaimer ⚠️<br>
-This tool provides informational content only and is not a substitute for professional medical advice.
-
-License 🪪<br>
-Feel free to use this code as open source, however don't forget to star the repo
-
+---
+**Disclaimer** ⚠️: This tool provides informational content only and is not a substitute for professional medical advice.
