@@ -1,0 +1,17 @@
+# Core Requirements
+google-generativeai>=0.3.0
+PyPDF2>=3.0.0
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+numpy>=1.24.0
+python-dotenv>=1.0.0
+
+# PDF Processing Alternatives (optional)
+pdfplumber>=0.9.0  # Alternative to PyPDF2
+
+# Text Processing
+nltk>=3.8.1  # For advanced text processing if needed
+
+# Development Tools
+ipykernel>=6.25.0  # Jupyter notebook support
+tqdm>=4.66.0  # Progress bars
